@@ -1,33 +1,39 @@
 
 
 const URL = "https://fakestoreapi.com/products";
+// let titulo = document.getElementById("titulo")
+// let precio = document.getElementById("precio")
+let productos = document.getElementById("productos")
 
-
-let titulo = document.getElementById("titulo")
-let precio = document.getElementById("precio")
-
-console.log()
-
-let tabla = "<div>"
+let tabla = "<div class='card'>";
 function getData(){
-
-    fetch (URL)
-    .then( response => response.json())
+    fetch(URL)
+    .then( response => response.json() )
     .then( data => {
-        console.log("Datos de la API",data)
-        for (let i = 0; i < data.length; i++) {
-            //console.log(data[i].title)
-            let bloquehtml = `<p>$(data[i].title)</p>`
-            console.log(bloquehtml)
-            tabla += bloquehtml;
-          }
+        console.log("Datos de la api: ", data)
+        for(let i = 0; i < data.length; i++ ){
+             //crear tag etiquetas html con js
+             let bloqueHtml =
 
-        tabla += "<div>";
-        producto.innerHTLM = tabla;
-} )
+             `
+             <div class='card-item'>
+             <div> </div>
+             <img width = "100px" src =  "${data[i].image}" />
+             <p>Titulo: ${data[i].title}</p>
+             <p>Precio: ${data[i].price}</p>
+             <p>Categoria:  ${data[i].category}</p>
+             </div>
 
+             `
+             
+
+             
+             tabla += bloqueHtml;
+        }
+        tabla +="</div>";
+        productos.innerHTML = tabla;
+    })
     
 }
-
 
 getData();
