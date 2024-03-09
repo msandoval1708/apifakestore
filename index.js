@@ -17,11 +17,11 @@ function getData(){
 
              `
              <div class='card-item'>
-             <div> </div>
+             <div class='cabezara'> </div>
              <img width = "100px" src =  "${data[i].image}" />
-             <p>Titulo: ${data[i].title}</p>
-             <p>Precio: ${data[i].price}</p>
-             <p>Categoria:  ${data[i].category}</p>
+             <p class='titulo'> ${data[i].title}</p>
+             <p>$ ${data[i].price}</p>
+             <label>Categoria:  ${data[i].category}</label>
              </div>
 
              `
@@ -35,5 +35,15 @@ function getData(){
     })
     
 }
+function generarColorAleatorio() {
+    const rojo = Math.floor(Math.random() * 256);
+    const verde = Math.floor(Math.random() * 256);
+    const azul = Math.floor(Math.random() * 256);
+  
+    return `rgb(${rojo}, ${verde}, ${azul})`;
+  }
+  
+  const colorAleatorio = generarColorAleatorio();
+  document.body.style.backgroundColor = colorAleatorio;
 
 getData();

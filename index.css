@@ -10,8 +10,39 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 20px;
+    color: white;
 }
 
 .card-item{
     background: rgb(62, 103, 110);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    
+    
+}
+
+.cabezara{
+    background: rgb(65, 186, 207);
+    height: 125px;
+    margin-bottom: 75px;
+}
+
+img{
+    height: 125px;
+    width: 125px;
+    border-radius: 1000px;
+    object-fit: auto;
+    position: absolute ;
+    right: calc(45% - 50px);
+    top: calc(19% - 65px);
+}
+
+p, label{
+    padding: 3px 20px;
+    font-weight: 600;
+}
+
+.titulo{
+    font-weight: 100;
 }
