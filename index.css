@@ -11,6 +11,7 @@
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     grid-gap: 10px;
     color:white;
+    margin: 50px;
 }
 
 .card-item{
@@ -41,7 +42,7 @@ img{
     border-radius: 1000px;
     position: absolute ;
     right: calc(45% - 50px);
-    top: calc(19% - 65px);
+    top: calc(17% - 65px);
     background: white;
     display: flex;
     overflow: hidden;
@@ -92,4 +93,40 @@ p, label{
     color: #6fca8e;
     font-weight:400;
     margin-left: 15px;
+}
+
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.price-new {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.price-discount {
+    color: green;
+    font-weight: bold;
+}
+
+.savings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.savings-amount {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.savings-percent {
+    color: gray;
+    font-size: 0.8em;
 }
