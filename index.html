@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FakeStore</title>
+    <link rel="icon" href="tienda-online.ico">
     <link rel="stylesheet" href="./index.css">
 </head>
 <body>
     <div id="search-bar">
-        <input type="search" id="search-input" placeholder="Search...">
-        <button id="search-button">Search</button>
-    </div>
+        <input id="search-input" type="text" placeholder="Buscar en FakeStore">
+        <select id="category-filter">
+          <option value="">Todas las Categorias</option>
+          <option value="men's clothing">Men's clothing</option>
+          <option value="women's clothing">Women's clothing</option>
+          <option value="jewelery">Jewelery</option>
+          <option value="electronics">Electronics</option>
+        </select>
+        <button id="search-button">Buscar</button>
+      </div>
     <div id="productos"></div>
   
 </body>

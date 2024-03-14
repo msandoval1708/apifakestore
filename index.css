@@ -130,3 +130,11 @@ p, label{
     color: gray;
     font-size: 0.8em;
 }
+
+#category-filter {
+    margin-left: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }

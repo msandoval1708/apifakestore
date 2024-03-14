@@ -1,8 +1,6 @@
 
 
 const URL = "https://fakestoreapi.com/products";
-// let titulo = document.getElementById("titulo")
-// let precio = document.getElementById("precio")
 let productos = document.getElementById("productos")
 
 let tabla = "<div class='card'>";
@@ -64,23 +62,27 @@ document.body.style.backgroundColor = colorAleatorio;
 
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
+const categoryFilter = document.getElementById("category-filter");
 
 searchButton.addEventListener("click", function() {
   const searchTerm = searchInput.value.toLowerCase();
+  const selectedCategory = categoryFilter.value;
   const cardItems = document.getElementsByClassName("card-item");
 
   for (let i = 0; i < cardItems.length; i++) {
       const title = cardItems[i].getElementsByClassName("titulo")[0].innerText.toLowerCase();
-      if (title.includes(searchTerm)) {
+      const category = cardItems[i].getElementsByClassName("categoria")[0].innerText.toLowerCase();
+      if (title.includes(searchTerm) && (selectedCategory === "" || category.includes(selectedCategory))) {
           cardItems[i].style.display = "block";
       } else {
           cardItems[i].style.display = "none";
       }
- }
+  }
 });
 
-searchInput.addEventListener("input", function() {
-  searchButton.click();
-});
+// filter(data => (data.categoryFilter = ()) )
+// [].push
 
-getData();
+
+
+getData();  
