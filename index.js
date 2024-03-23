@@ -1,64 +1,59 @@
 const URL = "https://fakestoreapi.com/products";
-let productos = document.getElementById("productos")
-let categoryFilter = document.getElementById("category-filter");
-let listaProducto = []; // Move this line outside the getData() function
+const productos = document.getElementById("productos");
+const categoryFilter = document.getElementById("category-filter");
+let listaProducto = [];
 
-let tabla = "<div class='card'>";
+const tabla = document.createElement("div");
+tabla.className = "card";
 
 function getData() {
   fetch(URL)
     .then(response => response.json())
     .then(data => {
-        console.log("Datos de la api: ", data);
-        let productosCardSet = JSON.stringify(data)
-        localStorage.setItem('productos',productosCardSet)
-        console.log(productosCardSet)
+      console.log("Datos de la api: ", data);
+      listaProducto = data;
 
-        listaProducto = data; // Assign the data to the listaProducto array
-
-        // Populate the categoryFilter select element with the categories
-const categoryFilter = document.getElementById("category-filter");
-
-// Add the first empty option for "Todas las categorias"
-let option = document.createElement("option");
+      // Populate the categoryFilter select element with the categories
+      let option = document.createElement("option");
 option.value = "";
 option.textContent = "Todas las categorias";
 categoryFilter.appendChild(option);
 
-// Get all categories from the API data
-const categories = [...new Set(data.map(item => item.category))];
+      const categories = [...new Set(data.map(item => item.category))];
+      categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+      });
+      
 
-// Populate the categoryFilter select element with the categories
-categories.forEach(category => {
-  let option = document.createElement("option");
-  option.value = category;
-  option.textContent = category;
-  categoryFilter.appendChild(option);
-});
-
-        for (let i = 0; i < data.length; i++) {
-            let bloqueHtml = `
-            <div class='card-item'>
+      // Populate the cards
+      tabla.innerHTML = "";
+      for (let i = 0; i < data.length; i++) {
+        const { title, image, category, price } = data[i];
+        const bloqueHtml = `
+          <div class='card-item'>
             <div class='cabezara' style="background-color: ${generarColorAleatorio()};"> </div>
             <div class='cont-img'>
-            <img src =  "${data[i].image}" /> 
+              <img src =  "${image}" /> 
             </div>
-            <p class='titulo'> ${data[i].title}</p>
+            <p class='titulo'> ${title}</p>
             <div class="price-container">
-                <p class="price-new">Precio nuevo: US$${data[i].price}</p>
-                <p class="price-discount">Precio: US$${(data[i].price * (1 - 0.45)).toFixed(2)}</p>
+                <p class="price-new">Precio nuevo: US$${price}</p>
+                <p class="price-discount">Precio: US$${(price * (1 - 0.45)).toFixed(2)}</p>
             </div>
             <div class="savings">
-                <p class="savings-amount">TE AHORRAS: US$${(data[i].price * 0.45).toFixed(2)}</p>
+                <p class="savings-amount">TE AHORRAS: US$${(price * 0.45).toFixed(2)}</p>
                 <p class="savings-percent">(45%)</p>
             </div>
-            <label class='categoria'>Categoria: ${data[i].category} </label>
-            </div>
-            `;
-            tabla += bloqueHtml;
-        }tabla += "</div>";
-        productos.innerHTML = tabla;
-      });
+            <label class='categoria'>Categoria: ${category} </label>
+          </div>
+        `;
+        tabla.innerHTML += bloqueHtml;
+      }
+      productos.appendChild(tabla);
+    });
 }
 
 function generarColorAleatorio() {
@@ -66,23 +61,16 @@ function generarColorAleatorio() {
   const verde = Math.floor(Math.random() * 256);
   const azul = Math.floor(Math.random() * 256);
   return `rgb(${rojo}, ${verde}, ${azul})`;
+  
 }
-
-function generarColorAleatorio1() {
-  const rojo = Math.floor(Math.random() * 256);
-const verde = Math.floor(Math.random() * 256);
-  const azul = Math.floor(Math.random() * 256);
- 
- return `rgb(${rojo}, ${verde}, ${azul})`;
-}
-
-const colorAleatorio = generarColorAleatorio1();
+const colorAleatorio = generarColorAleatorio()
 document.body.style.backgroundColor = colorAleatorio;
+
+
 
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
-
-searchInput.addEventListener("input", function() {
+searchButton.addEventListener("click", function() {
   const searchTerm = searchInput.value.toLowerCase();
   const selectedCategory = categoryFilter.value;
   const cardItems = document.getElementsByClassName("card-item");
@@ -111,10 +99,5 @@ searchInput.addEventListener("input", function() {
   }
   searchResults.innerHTML = searchResultsHtml;
 });
-
-// filter(data => (data.categoryFilter = ()) )
-// [].push
-
-
 
 getData();
